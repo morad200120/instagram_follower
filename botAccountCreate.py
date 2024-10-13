@@ -34,18 +34,7 @@ solver = RecaptchaSolver(driver=driver)
 
 time.sleep(5)
 
-try:
-    pulsante_cookie = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button._a9--._ap36._a9_0")))
-    pulsante_cookie.click()
-    time.sleep(1)
-    pulsante_cookie.click()
-    time.sleep(1)
-    pulsante_cookie.click()
-    time.sleep(1)
-    pulsante_cookie.click()
-
-except TimeoutException:
-    print("Non è stato possibile trovare o cliccare il pulsante dei cookie.")
+pulsante_cookie = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button._a9--._ap36._a9_0")))
 
 time.sleep(5)
 
