@@ -1,2 +1,0 @@
-class RecaptchaException(Exception):
-    pass
