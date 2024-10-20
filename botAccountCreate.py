@@ -5,13 +5,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-import fakeMail
 import accountInfoGenerator
 from fake_useragent import UserAgent
 import time
 from selenium_recaptcha_solver import RecaptchaSolver
 import undetected_chromedriver as uc
-from getVerifCode import getInstVeriCode
 import random
 
 
@@ -34,7 +32,19 @@ solver = RecaptchaSolver(driver=driver)
 
 time.sleep(5)
 
-pulsante_cookie = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button._a9--._ap36._a9_0")))
+pulsante_cookie = WebDriverWait(
+    driver, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//button[contains(text(), 'Consenti tutti i cookie')]"))
+)
+
+try:
+
+    pulsante_cookie.click()
+    print("Pulsante cookie cliicato")
+
+except:
+    print("Impossibile cliccare il pulsante dei cookie")
 
 time.sleep(5)
 
