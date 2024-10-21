@@ -12,6 +12,7 @@ import time
 import random
 
 
+
 user_agent = UserAgent().random
 
 
@@ -123,7 +124,7 @@ try:
         generated_username = fake.user_name()
 
         username_field.clear()
-        
+
         username_field.send_keys(generated_username)
         print(f"Tentativo di inserire username: {generated_username}")
 
