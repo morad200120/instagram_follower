@@ -7,16 +7,24 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from fake_useragent import UserAgent
 import undetected_chromedriver as uc
 import get_email
+import multi_proxies
 from faker import Faker
 import time
 import random
 
 
 
+
+
+
 user_agent = UserAgent().random
 
+#proxies = multi_proxies.fetch_proxies()
+#selected_proxy = random.choice(proxies)
+#print(f"Proxy scelto: {selected_proxy}")
 
 chrome_options = Options()
+#chrome_options.add_argument(f'--proxy-server={selected_proxy}')
 chrome_options.add_argument("--disable-search-engine-choice-screen")  
 chrome_options.add_argument(f'user-agent={user_agent}')  
 
@@ -162,7 +170,7 @@ try:
 
 except Exception as e:
     print(f"Operazione cliccare pulsante avanti non riuscita: {e}")
-    time.sleep(100)
+    time.sleep(1000)
 
 
-time.sleep(2)
+time.sleep(1000)
