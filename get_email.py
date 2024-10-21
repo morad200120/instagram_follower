@@ -10,7 +10,6 @@ session = GuerrillaMailSession()
 # Funzione che genera una nuova email
 def generate_email():
     email_address = session.get_session_state()['email_address']
-    print(f"Email generata: {email_address}")
     return email_address
 
 # Funzione per ottenere il codice dall'email
@@ -27,7 +26,7 @@ def ottieni_codice():
                 match = re.search(r'\d{6}', email.subject)
                 if match:
                     code = match.group(0)
-                    print(f"Codice estratto dall'oggetto: {code}")
+                    print(f"Il codice è {code}")
                     return code
                 else:
                     print("Nessun codice trovato nell'oggetto.")
