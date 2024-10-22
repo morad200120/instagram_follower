@@ -126,51 +126,64 @@ try:
                 (By.NAME, "username"))
     )
 
-    is_username_available = False
+    generated_username = fake.user_name()
 
-    while not is_username_available:
-        generated_username = fake.user_name()
+    username_field.clear()
+    username_field.send_keys(generated_username)
 
-        username_field.clear()
-
-        username_field.send_keys(generated_username)
-        print(f"Tentativo di inserire username: {generated_username}")
+    print(f"Username inserito: {generated_username}")
 
 
-        time.sleep(2)
-        try:
-
-            error_message = WebDriverWait(driver, 2).until(
-                EC.visibility_of_element_located((By.XPATH, "//p[contains(text(), 'Nome utente già in uso')]"))  
-            )
-            print("Nome utente già in uso, generando un altro...")
-
-            continue 
-        except TimeoutException:
-            is_username_available = True  
-
-    print(f"Nome utente disponibile: {generated_username}")
 
 except Exception as e:
     print(f"Operazione username non riuscita: {e}")
 
+time.sleep(5)
 
-time.sleep(random.randint(0, 3))
-
-
-try:
-    credential_button = WebDriverWait(
-        driver, 5).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[contains(text(), 'Avanti')]"))
+suggerimento = WebDriverWait(
+    driver, 5).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, f"//*[@tabindex='{0}']"))
     )
 
-    credential_button.click()
-    print(f"Pulsante avanti cliccato")
+if suggerimento:
+    suggerimento.click()
 
-except Exception as e:
-    print(f"Operazione cliccare pulsante avanti non riuscita: {e}")
-    time.sleep(1000)
+    time.sleep(random.randint(1.5, 3.5))
+
+
+    try:
+        credential_button = WebDriverWait(
+            driver, 5).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[contains(text(), 'Avanti')]"))
+        )
+
+        credential_button.click()
+        print(f"Pulsante avanti cliccato")
+
+    except Exception as e:
+        print(f"Operazione cliccare pulsante avanti non riuscita: {e}")
+        time.sleep(1000)
+else:
+    try:
+        credential_button = WebDriverWait(
+            driver, 5).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[contains(text(), 'Avanti')]"))
+        )
+
+        time.sleep(random.randint(1.5, 3.5))
+
+
+        credential_button.click()
+        print(f"Pulsante avanti cliccato")
+
+    except Exception as e:
+        print(f"Operazione cliccare pulsante avanti non riuscita: {e}")
+        time.sleep(1000)
+
+
 
 
 time.sleep(1000)
